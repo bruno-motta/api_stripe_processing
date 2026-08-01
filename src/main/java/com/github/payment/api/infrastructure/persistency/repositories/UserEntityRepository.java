@@ -4,6 +4,7 @@ import com.github.payment.api.infrastructure.persistency.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -12,7 +13,7 @@ public interface UserEntityRepository extends JpaRepository<UserEntity, UUID> {
 
     Optional<UserEntity> findByEmail(String email);
 
-    Optional<UserEntity> findByNameContainingIgnoreCase(String name);
+    List<UserEntity> findByNameContainingIgnoreCase(String name);
 
-    boolean existingEmail(boolean active);
+    boolean existsByEmail(String email);
 }
