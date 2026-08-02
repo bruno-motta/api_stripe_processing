@@ -1,4 +1,4 @@
-package com.github.payment.api.infrastructure.persistency.entity;
+package com.github.payment.api.infrastructure.persistence.entity;
 
 import com.github.payment.api.domain.enuns.RoleUser;
 import jakarta.persistence.*;
