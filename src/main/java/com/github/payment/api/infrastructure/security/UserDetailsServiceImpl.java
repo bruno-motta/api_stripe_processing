@@ -1,6 +1,6 @@
 package com.github.payment.api.infrastructure.security;
 
-import com.github.payment.api.infrastructure.persistency.repositories.UserEntityRepository;
+import com.github.payment.api.infrastructure.persistence.repositories.UserEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,11 +12,10 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserEntityRepository userEntityRepository;
-
+    //TODO: CASTING?
     @Override
     public UserDetails loadUserByUsername(String usernameEmail) throws UsernameNotFoundException {
-        return userEntityRepository.findByEmail(usernameEmail)
-                .map(UserDetailsImpl::new)
+        return (UserDetails) userEntityRepository.findByEmail(usernameEmail)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado" + usernameEmail)
         );
     }
