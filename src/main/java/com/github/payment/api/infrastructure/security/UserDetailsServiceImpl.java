@@ -1,6 +1,6 @@
 package com.github.payment.api.infrastructure.security;
 
-import com.github.payment.api.infrastructure.persistency.repositories.UserEntityRepository;
+import com.github.payment.api.infrastructure.persistence.repositories.UserEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

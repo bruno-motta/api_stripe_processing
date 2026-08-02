@@ -1,6 +1,6 @@
 package com.github.payment.api.infrastructure.security;
 
-import com.github.payment.api.infrastructure.persistency.entity.UserEntity;
+import com.github.payment.api.infrastructure.persistence.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
