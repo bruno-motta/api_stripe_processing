@@ -8,7 +8,7 @@ import java.util.UUID;
 public record RegisterUserResponse(UUID id,
                                    String name,
                                    String email,
-                                   String role,
+                                   RoleUser role,
                                    OffsetDateTime createdAt,
                                    OffsetDateTime updatedeAt,
                                    boolean active
