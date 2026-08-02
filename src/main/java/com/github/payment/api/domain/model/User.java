@@ -15,8 +15,10 @@ public class User {
     private String passwordHash;      
     private RoleUser role;
     private OffsetDateTime createdAt;
-    private OffsetDateTime updatedAt;
+    private OffsetDateTime updatedAt; //TODO: VERIFICAR USABILIDADE - RESPONSE/SERVICE
     private boolean active;
+
+    private final static OffsetDateTime now = OffsetDateTime.now();
 
     private User(UUID id, String name, String email, String passwordHash, RoleUser role, OffsetDateTime createdAt, boolean active) {
         this.id = id;
@@ -28,22 +30,39 @@ public class User {
         this.active = active;
     }
 
-    private final static OffsetDateTime now = OffsetDateTime.now();
+    private User(){};
 
     public static User create(String name, String email, String passwordHash){
         validateName(name);
         validateEmail(email);
 
-        return new User(
-                UUID.randomUUID(),
-                name,
-                email,
-                passwordHash,
-                RoleUser.USER,
-                OffsetDateTime.now(),
-                true
+        User user = new User();
+        user.id = UUID.randomUUID();
+        user.name = name;
+        user.email = email;
+        user.passwordHash = passwordHash;
+        user.role = RoleUser.ROLE_USER;
+        user.createdAt = now;
+        user.updatedAt = now;
+        user.active = true;
 
-        );
+        return user;
+
+    }
+
+    public static User reconstitute(UUID id, String name, String email, String passwordHash, RoleUser role, OffsetDateTime createdAt, OffsetDateTime updatedAt, boolean active){
+
+        User user = new User();
+        user.id = id;
+        user.name = name;
+        user.email = email;
+        user.passwordHash = passwordHash;
+        user.role = role;
+        user.createdAt = createdAt;
+        user.updatedAt = updatedAt;
+        user.active = active;
+
+        return user;
     }
 
     public void deactivate(){
