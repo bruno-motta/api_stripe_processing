@@ -14,14 +14,14 @@ public class UserEntityMapper {
         entity.setPasswordHash(user.getPasswordHash());
         entity.setRole(user.getRole());
         entity.setCreatedAt(user.getCreatedAt());
-        entity.setCreatedAt(user.getUpdatedAt());
+        entity.setUpdatedAt(user.getUpdatedAt());
         entity.setActive(user.isActive());
 
         return entity;
     }
 
     // Entity -> Domain (ao ler o banco)
-    public static User toResponse(UserEntity entity){
+    public static User toDomain(UserEntity entity){
         return User.reconstitute(
                 entity.getId(),
                 entity.getName(),
