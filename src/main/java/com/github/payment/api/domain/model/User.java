@@ -94,23 +94,9 @@ public class User {
             throw new IllegalArgumentException("O E-mail precisa ser informado");
         }
 
-        if(email.contains("@")){
+        if(!email.contains("@")){
             throw new IllegalArgumentException("Informe um e-mail válido");
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
