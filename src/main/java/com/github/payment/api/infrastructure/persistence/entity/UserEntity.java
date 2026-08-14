@@ -1,4 +1,4 @@
-package com.github.payment.api.infrastructure.persistency.entity;
+package com.github.payment.api.infrastructure.persistence.entity;
 
 import com.github.payment.api.domain.enuns.RoleUser;
 import jakarta.persistence.*;
@@ -21,7 +21,7 @@ import java.util.UUID;
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+//    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(nullable = false)

@@ -1,6 +1,6 @@
-package com.github.payment.api.infrastructure.persistency.repositories;
+package com.github.payment.api.infrastructure.persistence.repositories;
 
-import com.github.payment.api.infrastructure.persistency.entity.UserEntity;
+import com.github.payment.api.infrastructure.persistence.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
