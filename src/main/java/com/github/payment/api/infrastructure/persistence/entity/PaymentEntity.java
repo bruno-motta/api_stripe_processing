@@ -53,7 +53,7 @@ public class PaymentEntity {
     @Column(name = "payment_method_id", nullable = false)
     private String paymentMethodId;
 
-    @Column(name = "gateway_transactio_id", nullable = false)
+    @Column(name = "gateway_transaction_id", nullable = false)
     private String gatewayTransactionId;
 
     @CreationTimestamp //TODO = VERIFICAR ATRIBUTO TIMESTAMP
