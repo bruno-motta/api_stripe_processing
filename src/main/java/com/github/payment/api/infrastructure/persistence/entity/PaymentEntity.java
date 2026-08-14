@@ -36,9 +36,8 @@ public class PaymentEntity {
     @Column(precision = 19, scale = 2, nullable = false)
     private BigDecimal amount;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Currency currency;
+    private String currency;
 
     private String description;
 
@@ -58,11 +57,11 @@ public class PaymentEntity {
 
     @CreationTimestamp //TODO = VERIFICAR ATRIBUTO TIMESTAMP
     @Column(name = "created_at", nullable = false, updatable = false)
-    private OffsetDateTime created_at;
+    private OffsetDateTime createdAt;
 
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
-    private OffsetDateTime updated_at;
+    private OffsetDateTime updatedAt;
 
     @Column(nullable = false)
     private int retry;
