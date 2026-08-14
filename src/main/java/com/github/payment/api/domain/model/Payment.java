@@ -15,7 +15,7 @@ public class Payment {
     private UUID id;
     private UUID userId;
     private BigDecimal amount;
-    private Currency currency;
+    private String currency;
     private String description;
     private StatusPayment status;
     private PaymentMethod paymentMethod;
@@ -31,7 +31,7 @@ public class Payment {
 
     }
 
-    public static Payment create(BigDecimal amount, Currency currency, String description,
+    public static Payment create(BigDecimal amount, String currency, String description,
                                  PaymentMethod  paymentMethod,String paymentMethodId, UUID userId){
 
         validateAmount(amount);
@@ -55,6 +55,26 @@ public class Payment {
         payment.updatedAt = now;
         payment.retry = 0;
 
+        return payment;
+    }
+
+    public static Payment reconstitute(UUID id, UUID userId, BigDecimal amount,
+                                       String currency, String description, StatusPayment status,
+                                       PaymentMethod paymentMethod , String paymentMethodId, String gatewayTransactionId,
+                                       OffsetDateTime createdAt, OffsetDateTime updatedAt, int retry){
+        Payment payment = new Payment();
+        payment.id = id;
+        payment.userId = userId;
+        payment.amount = amount;
+        payment.currency = currency;
+        payment.description = description;
+        payment.status = status;
+        payment.paymentMethod = paymentMethod;
+        payment.paymentMethodId = paymentMethodId;
+        payment.gatewayTransactionId = gatewayTransactionId;
+        payment.createdAt = createdAt;
+        payment.updatedAt = updatedAt;
+        payment.retry = retry;
         return payment;
     }
 
@@ -131,7 +151,7 @@ public class Payment {
         }
     }
 
-    private static void validateCurrency(Currency currency){
+    private static void validateCurrency(String currency){
         if(currency == null){
             throw new IllegalArgumentException("Moeda é obrigatória");
         }
