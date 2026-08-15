@@ -1,0 +1,40 @@
+services:
+
+  api_pay:
+    build: .
+    ports:
+      - "8080:8080"
+
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL_PAYMENT=jdbc:postgresql://postgres_pay:5432/stripe_payment
+
+    depends_on:
+      postgres_pay:
+        condition: service_healthy
+
+  postgres_pay:
+    image: postgres:16
+
+    env_file:
+      - .env
+
+    environment:
+      POSTGRES_DB: stripe_payment
+      POSTGRES_USER: ${DB_USERNAME_PAYMENT}
+      POSTGRES_PASSWORD: ${DB_PASSWORD_PAYMENT}
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${DB_USERNAME_PAYMENT} -d stripe_payment"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
