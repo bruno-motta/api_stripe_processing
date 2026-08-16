@@ -31,7 +31,7 @@ public class PaymentEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity userId;
+    private UserEntity user;
 
     @Column(precision = 19, scale = 2, nullable = false)
     private BigDecimal amount;
