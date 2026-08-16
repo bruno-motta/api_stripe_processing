@@ -11,9 +11,9 @@ import java.util.UUID;
 
 public interface PaymentEntityRepository extends JpaRepository<PaymentEntity, UUID> {
 
-    Optional<PaymentEntity> findAllByIdAndUserId(UUID id, UserEntity userId);
+    Optional<PaymentEntity> findByIdAndUser_Id(UUID id, UUID userId);
 
-    List<PaymentEntity> findAllById(UUID id);
+    List<PaymentEntity> findAllByUser_Id(UUID userId);
 
     //Query JPQL, criada p
     @Query("SELECT p FROM PaymentEntity p WHERE p.statusPayment = 'FAILED' AND p.retry < 3")

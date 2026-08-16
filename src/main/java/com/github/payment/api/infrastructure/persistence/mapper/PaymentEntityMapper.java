@@ -16,7 +16,7 @@ public class PaymentEntityMapper {
         UserEntity userEntity = new UserEntity();
         userEntity.setId(payment.getUserId());
 
-        entity.setUserId(userEntity);
+        entity.setUser(userEntity);
 
         entity.setAmount(payment.getAmount());
         entity.setCurrency(payment.getCurrency());
@@ -36,7 +36,7 @@ public class PaymentEntityMapper {
 
         return Payment.reconstitute(
                 entity.getId(),
-                entity.getUserId().getId(),
+                entity.getUser().getId(),
                 entity.getAmount(),
                 entity.getCurrency(),
                 entity.getDescription(),
