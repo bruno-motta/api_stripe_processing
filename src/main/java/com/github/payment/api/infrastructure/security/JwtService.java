@@ -21,7 +21,7 @@ public class JwtService {
     @Value("${JWT_SECRET_PAYMENT}")
     private String secret;
 
-    public String generateToken(Long userId,UserDetailsImpl user){
+    public String generateToken(UserDetailsImpl user){
 
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
@@ -36,7 +36,6 @@ public class JwtService {
             return JWT.create()
                     .withIssuer("payment-api")
                     .withSubject(user.getUsername())
-                    .withClaim("user.id", userId)
                     .withClaim("role", role)
                     .withIssuedAt(Date.from(now))
                     .withExpiresAt(Date.from(expiry))
