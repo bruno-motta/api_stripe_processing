@@ -8,15 +8,13 @@ import java.util.UUID;
 @Getter
 public class IdempotencyKey {
 
-    private UUID id;
-    private UUID key; // chave enviada pelo cliente no header
-    private UUID paymentId; // referência ao pagamento criado
-    private String responseBody; //  JSON da resposta original para devolver igual
-    private OffsetDateTime createdAt;
+    private  UUID id;
+    private  UUID key; // chave enviada pelo cliente no header
+    private  UUID paymentId; // referência ao pagamento criado
+    private  String responseBody; //  JSON da resposta original para devolver igual
+    private  OffsetDateTime createdAt;
 
-    private IdempotencyKey(){
 
-    }
 
     public static IdempotencyKey create(UUID key, UUID paymentId, String responseBody){
         if(key == null){
@@ -37,6 +35,22 @@ public class IdempotencyKey {
         idempotencyKey.paymentId = paymentId;
         idempotencyKey.responseBody = responseBody;
         idempotencyKey.createdAt = OffsetDateTime.now();
+
+        return idempotencyKey;
+    }
+
+    public static IdempotencyKey reconstitute(UUID id, UUID key, UUID paymentId, String responseBody, OffsetDateTime createdAt){
+
+        if (id == null || key == null || paymentId == null || createdAt == null) {
+            throw new IllegalArgumentException("Dados de reconstituição de IdempotencyKey não podem conter campos nulos.");
+        }
+        
+        IdempotencyKey idempotencyKey = new IdempotencyKey();
+        idempotencyKey.id = id;
+        idempotencyKey.key = key;
+        idempotencyKey.paymentId = paymentId;
+        idempotencyKey.responseBody = responseBody;
+        idempotencyKey.createdAt = createdAt;
 
         return idempotencyKey;
     }
