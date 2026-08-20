@@ -29,7 +29,7 @@ public class IdempotencyKeyEntity {
     @JoinColumn(name ="payment_id", nullable = false )
     private PaymentEntity paymentId;
 
-    @Column(name = "response_body", nullable = false)
+    @Column(name = "response_body", nullable = false, columnDefinition = "TEXT")
     private String responseBody;
 
     @CreationTimestamp
