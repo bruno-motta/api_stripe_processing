@@ -14,7 +14,13 @@ public class IdempotencyKey {
     private  String responseBody; //  JSON da resposta original para devolver igual
     private  OffsetDateTime createdAt;
 
-
+    public IdempotencyKey(UUID id, UUID key, UUID paymentId, String responseBody, OffsetDateTime createdAt) {
+        this.id = id;
+        this.key = key;
+        this.paymentId = paymentId;
+        this.responseBody = responseBody;
+        this.createdAt = createdAt;
+    }
 
     public static IdempotencyKey create(UUID key, UUID paymentId, String responseBody){
         if(key == null){
@@ -29,14 +35,13 @@ public class IdempotencyKey {
             throw new IllegalArgumentException("Response body não pode ser nulo ou vazio.");
         }
 
-        IdempotencyKey idempotencyKey = new IdempotencyKey();
-        idempotencyKey.id = UUID.randomUUID();
-        idempotencyKey.key = key;
-        idempotencyKey.paymentId = paymentId;
-        idempotencyKey.responseBody = responseBody;
-        idempotencyKey.createdAt = OffsetDateTime.now();
-
-        return idempotencyKey;
+        return new IdempotencyKey(
+                UUID.randomUUID(),
+                key,
+                paymentId,
+                responseBody,
+                OffsetDateTime.now()
+        );
     }
 
     public static IdempotencyKey reconstitute(UUID id, UUID key, UUID paymentId, String responseBody, OffsetDateTime createdAt){
@@ -44,15 +49,18 @@ public class IdempotencyKey {
         if (id == null || key == null || paymentId == null || createdAt == null) {
             throw new IllegalArgumentException("Dados de reconstituição de IdempotencyKey não podem conter campos nulos.");
         }
-        
-        IdempotencyKey idempotencyKey = new IdempotencyKey();
-        idempotencyKey.id = id;
-        idempotencyKey.key = key;
-        idempotencyKey.paymentId = paymentId;
-        idempotencyKey.responseBody = responseBody;
-        idempotencyKey.createdAt = createdAt;
 
-        return idempotencyKey;
+        if (responseBody == null || responseBody.isBlank()) {
+            throw new IllegalArgumentException("ResponseBody não pode ser nulo ou vazio na reconstituição.");
+        }
+
+        return new IdempotencyKey(
+                id,
+                key,
+                paymentId,
+                responseBody,
+                createdAt
+        );
     }
 
 }
