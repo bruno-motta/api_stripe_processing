@@ -20,49 +20,47 @@ public class User {
 
     private final static OffsetDateTime now = OffsetDateTime.now();
 
-    private User(UUID id, String name, String email, String passwordHash, RoleUser role, OffsetDateTime createdAt, boolean active) {
+    private User(UUID id, String name, String email, String passwordHash, RoleUser role, OffsetDateTime createdAt,OffsetDateTime updatedAt, boolean active) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.passwordHash = passwordHash;
         this.role = role;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.active = active;
     }
 
-    private User(){};
 
     public static User create(String name, String email, String passwordHash){
         validateName(name);
         validateEmail(email);
 
-        User user = new User();
-        user.id = UUID.randomUUID();
-        user.name = name;
-        user.email = email;
-        user.passwordHash = passwordHash;
-        user.role = RoleUser.ROLE_USER;
-        user.createdAt = now;
-        user.updatedAt = now;
-        user.active = true;
-
-        return user;
+        return new User(
+                UUID.randomUUID(),
+                name,
+                email,
+                passwordHash,
+                RoleUser.ROLE_USER,
+                OffsetDateTime.now(),
+                OffsetDateTime.now(),
+                true
+        );
 
     }
 
     public static User reconstitute(UUID id, String name, String email, String passwordHash, RoleUser role, OffsetDateTime createdAt, OffsetDateTime updatedAt, boolean active){
 
-        User user = new User();
-        user.id = id;
-        user.name = name;
-        user.email = email;
-        user.passwordHash = passwordHash;
-        user.role = role;
-        user.createdAt = createdAt;
-        user.updatedAt = updatedAt;
-        user.active = active;
-
-        return user;
+        return new User(
+                id,
+                name,
+                email,
+                passwordHash,
+                role,
+                createdAt,
+                updatedAt,
+                active
+        );
     }
 
     public void deactivate(){
