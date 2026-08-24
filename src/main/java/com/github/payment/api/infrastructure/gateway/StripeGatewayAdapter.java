@@ -1,6 +1,6 @@
-package com.github.payment.api.infrastructure.persistence.adapter;
+package com.github.payment.api.infrastructure.gateway;
 
-import com.github.payment.api.application.ports.in.PaymentGatewayResult;
+import com.github.payment.api.application.ports.out.PaymentGatewayResult;
 import com.github.payment.api.application.ports.out.PaymentGatewayPort;
 import com.github.payment.api.domain.model.Payment;
 import com.stripe.Stripe;
@@ -44,7 +44,7 @@ public class StripeGatewayAdapter implements PaymentGatewayPort {
                     .setAutomaticPaymentMethods(
                             PaymentIntentCreateParams.AutomaticPaymentMethods.builder()
                                     .setEnabled(true)
-                                    .setAllowRedirects(PaymentIntentCreateParams.AutomaticPaymentMethods.AllowRedirects.ALWAYS)
+                                    .setAllowRedirects(PaymentIntentCreateParams.AutomaticPaymentMethods.AllowRedirects.NEVER)
                                     .build()
                     );
             // Se o pagamento já tiver o ID do metodo (ex: pm_card_visa), vincula
