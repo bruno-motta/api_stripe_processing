@@ -75,5 +75,10 @@ public class StripeGatewayAdapter implements PaymentGatewayPort {
         }
     }
 
+    @Override
+    public PaymentGatewayResult refund(String gatewayTransactionId) {
+        return null;
+    }
+
 
 }

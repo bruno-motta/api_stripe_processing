@@ -15,5 +15,6 @@ public interface PaymentGatewayPort {
     PaymentGatewayResult charge(Payment payment, String idempotencyKey);  // cobra
     // PaymentGatewayResult refund(Payment payment);  // estorna
 
+    PaymentGatewayResult refund(String gatewayTransactionId);
 
 }
