@@ -20,7 +20,6 @@ import com.github.payment.api.domain.model.Payment;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -107,7 +106,7 @@ public class PaymentService implements CreatePaymentUseCase,
         return null;
     }
 
-    // JAVA -> JSON TEXT
+    // OBJETO JAVA -> JSON TEXT
     private String serializer(PaymentCreateResponse response){
         try {
             return objectMapper.writeValueAsString(response);
