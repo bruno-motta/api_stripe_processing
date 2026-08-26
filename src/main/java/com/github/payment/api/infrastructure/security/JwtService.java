@@ -1,6 +1,7 @@
 package com.github.payment.api.infrastructure.security;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
@@ -37,6 +38,7 @@ public class JwtService {
                     .withIssuer("payment-api")
                     .withSubject(user.getUsername())
                     .withClaim("role", role)
+                    .withClaim("userId", user.getId().toString())
                     .withIssuedAt(Date.from(now))
                     .withExpiresAt(Date.from(expiry))
                     .sign(algorithm);
@@ -58,6 +60,20 @@ public class JwtService {
                     .getSubject();
 
         } catch (JWTVerificationException exception){
+            return null;
+        }
+    }
+
+    public String extractUserId(String token){
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+            return JWT.require(algorithm)
+                    .withIssuer("payment-api")
+                    .build()
+                    .verify(token)
+                    .getClaim("userId")
+                    .asString();
+        }catch (JWTVerificationException exception){
             return null;
         }
     }

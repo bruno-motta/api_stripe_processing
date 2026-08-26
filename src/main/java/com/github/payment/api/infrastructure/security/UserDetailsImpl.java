@@ -2,12 +2,14 @@ package com.github.payment.api.infrastructure.security;
 
 import com.github.payment.api.infrastructure.persistence.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 public class UserDetailsImpl implements UserDetails {
@@ -47,5 +49,9 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return userEntity.isActive();
+    }
+
+    public UUID getId(){
+        return userEntity.getId();
     }
 }
