@@ -1,7 +1,6 @@
 package com.github.payment.api.application.ports.out;
 
 
-import com.github.payment.api.application.ports.in.PaymentGatewayResult;
 import com.github.payment.api.domain.model.Payment;
 
 public interface PaymentGatewayPort {
@@ -16,5 +15,6 @@ public interface PaymentGatewayPort {
     PaymentGatewayResult charge(Payment payment, String idempotencyKey);  // cobra
     // PaymentGatewayResult refund(Payment payment);  // estorna
 
+    PaymentGatewayResult refund(String gatewayTransactionId);
 
 }

@@ -3,9 +3,11 @@ package com.github.payment.api.application.mapper;
 import com.github.payment.api.application.dtos.request.CreatePaymentRequest;
 import com.github.payment.api.application.dtos.response.PaymentCreateResponse;
 import com.github.payment.api.domain.model.Payment;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+@Component
 public class PaymentMapper {
 
     // Request -> Domain
